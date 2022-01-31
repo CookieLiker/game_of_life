@@ -61,6 +61,13 @@ impl Board {
         self.grid[(coord.y * GRID_SIZE.x + coord.x) as usize] = alive;
     }
 
+    fn paint_cell(&mut self, coord: &Vec2i, alive: bool) {
+        let index = (coord.y * GRID_SIZE.x + coord.x) as usize;
+        if index < self.grid.len() {
+            self.set_cell(coord, alive);
+        }
+    }
+
     fn get_cell(&self, coord: &Vec2i) -> bool {
         self.grid[(coord.y * GRID_SIZE.x + coord.x) as usize]
     }
@@ -189,9 +196,9 @@ impl App {
         };
 
         if mouse_info.left_pressed {
-            self.board.set_cell(&mouse_pos, true);
+            self.board.paint_cell(&mouse_pos, true);
         } else if mouse_info.right_pressed {
-            self.board.set_cell(&mouse_pos, false);
+            self.board.paint_cell(&mouse_pos, false);
         }
 
         if self.paused {
