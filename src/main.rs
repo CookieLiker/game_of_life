@@ -77,6 +77,7 @@ impl Board {
 
         for y in -1..=1 {
             for x in -1..=1 {
+                // we don't count ourselves as neighbors
                 if x == 0 && y == 0 {
                     continue;
                 }
@@ -190,6 +191,7 @@ impl App {
     }
 
     fn update(&mut self, args: &UpdateArgs, mouse_info: &MouseInfo) {
+        // translate mouse position to grid coords
         let mouse_pos = Vec2i {
             x: mouse_info.position.x as i32 / WINDOW_SCALE.x,
             y: mouse_info.position.y as i32 / WINDOW_SCALE.y,
